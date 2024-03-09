@@ -2,15 +2,13 @@
 {
     public class Reporting
     {
-        private List<Warehouse> inventory; // Список товарів на складі
+        private List<Warehouse> inventory; 
 
-        // Конструктор класу
         public Reporting()
         {
             inventory = new List<Warehouse>();
         }
 
-        // Метод для реєстрації надходження товару (прибуткова накладна)
         public void RecordArrival(Warehouse newItem)
         {
             inventory.Add(newItem);
@@ -18,7 +16,6 @@
             newItem.DisplayItemDetails();
         }
 
-        // Метод для реєстрації відвантаження товару (видаткова накладна)
         public void RecordShipment(Warehouse itemToShip, int quantity)
         {
             if (!inventory.Contains(itemToShip))
@@ -37,7 +34,6 @@
             Console.Write($"Quantity: {quantity}\n");
         }
 
-        // Метод для генерації звіту по інвентаризації
         public void GenerateInventoryReport()
         {
             Console.WriteLine("Inventory Report:");
