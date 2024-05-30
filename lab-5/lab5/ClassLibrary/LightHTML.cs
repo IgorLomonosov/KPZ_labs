@@ -19,5 +19,24 @@ namespace ClassLibrary
         {
             return Root.OuterHtml;
         }
+
+        public IEnumerable<LightNode> GetNodesDepthFirst()
+        {
+            var iterator = ((IIterableLightNode)Root).CreateDepthFirstIterator();
+            while (iterator.HasNext())
+            {
+                yield return iterator.Next();
+            }
+        }
+
+        public IEnumerable<LightNode> GetNodesBreadthFirst()
+        {
+            var iterator = ((IIterableLightNode)Root).CreateBreadthFirstIterator();
+            while (iterator.HasNext())
+            {
+                yield return iterator.Next();
+            }
+        }
     }
 }
+
