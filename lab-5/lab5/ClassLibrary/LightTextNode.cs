@@ -25,5 +25,9 @@ namespace ClassLibrary
             Text = text;
             state = new TextNodeState();
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

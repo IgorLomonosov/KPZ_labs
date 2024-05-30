@@ -42,5 +42,9 @@ namespace ClassLibrary
         {
             return new BreadthFirstIterator(this);
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

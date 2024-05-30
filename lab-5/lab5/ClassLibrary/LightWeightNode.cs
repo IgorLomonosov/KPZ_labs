@@ -27,5 +27,9 @@ namespace ClassLibrary
             Content = content;
             state = new WeightNodeState();
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
