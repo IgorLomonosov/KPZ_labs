@@ -13,21 +13,19 @@ namespace ClassLibrary
 
         public override string OuterHtml
         {
-            get
-            {
-                return $"<{TagName}>{Content}</{TagName}>";
-            }
+            get { return state.GetOuterHtml(this); }
         }
 
         public override string InnerHtml
         {
-            get { return Content; }
+            get { return state.GetInnerHtml(this); }
         }
 
         public LightWeightNode(string tagName, string content)
         {
             TagName = tagName;
             Content = content;
+            state = new WeightNodeState();
         }
     }
 }
