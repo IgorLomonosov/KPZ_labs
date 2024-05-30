@@ -16,7 +16,17 @@ namespace ClassLibrary
 
         public override string OuterHtml
         {
-            get { return state.GetOuterHtml(this); }
+            get
+            {
+                OnTextRendered();
+                string classes = CssClasses != null ? string.Join(" ", CssClasses) : "";
+                OnClassListApplied();
+                string childrenHtml = Children != null ? string.Join("", Children.Select(child => child.OuterHtml)) : "";
+                string closingTag = ClosingType == "single" ? "/>" : $">{childrenHtml}</{TagName}>";
+                OnStylesApplied();
+
+                return $"<{TagName} class=\"{classes}\"{closingTag}";
+            }
         }
 
         public override string InnerHtml
@@ -31,6 +41,7 @@ namespace ClassLibrary
             ClosingType = closingType;
             CssClasses = cssClasses;
             Children = children;
+            OnCreated();
             state = new ElementNodeState();
         }
         public ILightNodeIterator CreateDepthFirstIterator()

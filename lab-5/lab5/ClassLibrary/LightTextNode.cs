@@ -12,7 +12,11 @@ namespace ClassLibrary
 
         public override string OuterHtml
         {
-            get { return state.GetOuterHtml(this); }
+            get
+            {
+                OnTextRendered();
+                return Text;
+            }
         }
 
         public override string InnerHtml
@@ -23,6 +27,7 @@ namespace ClassLibrary
         public LightTextNode(string text)
         {
             Text = text;
+            OnCreated();
             state = new TextNodeState();
         }
         public override void Accept(IVisitor visitor)

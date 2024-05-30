@@ -13,7 +13,11 @@ namespace ClassLibrary
 
         public override string OuterHtml
         {
-            get { return state.GetOuterHtml(this); }
+            get
+            {
+                OnTextRendered();
+                return $"<{TagName}>{Content}</{TagName}>";
+            }
         }
 
         public override string InnerHtml
@@ -25,6 +29,7 @@ namespace ClassLibrary
         {
             TagName = tagName;
             Content = content;
+            OnCreated();
             state = new WeightNodeState();
         }
         public override void Accept(IVisitor visitor)
