@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class LightElementNode : LightNode
+    public class LightElementNode : LightNode, IIterableLightNode
     {
         public string TagName { get; set; }
         public string DisplayType { get; set; }
@@ -31,10 +31,7 @@ namespace ClassLibrary
 
         public override string InnerHtml
         {
-            get
-            {
-                return Children != null ? string.Join("", Children.Select(child => child.OuterHtml)) : "";
-            }
+            get { return state.GetInnerHtml(this); }
         }
 
         public LightElementNode(string tagName, string displayType, string closingType, List<string> cssClasses, List<LightNode> children)
@@ -45,6 +42,20 @@ namespace ClassLibrary
             CssClasses = cssClasses;
             Children = children;
             OnCreated();
+            state = new ElementNodeState();
+        }
+        public ILightNodeIterator CreateDepthFirstIterator()
+        {
+            return new DepthFirstIterator(this);
+        }
+
+        public ILightNodeIterator CreateBreadthFirstIterator()
+        {
+            return new BreadthFirstIterator(this);
+        }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

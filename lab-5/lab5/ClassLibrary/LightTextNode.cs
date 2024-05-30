@@ -21,13 +21,18 @@ namespace ClassLibrary
 
         public override string InnerHtml
         {
-            get { return Text; }
+            get { return state.GetInnerHtml(this); }
         }
 
         public LightTextNode(string text)
         {
             Text = text;
             OnCreated();
+            state = new TextNodeState();
+        }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

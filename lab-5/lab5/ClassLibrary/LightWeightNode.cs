@@ -22,7 +22,7 @@ namespace ClassLibrary
 
         public override string InnerHtml
         {
-            get { return Content; }
+            get { return state.GetInnerHtml(this); }
         }
 
         public LightWeightNode(string tagName, string content)
@@ -30,6 +30,11 @@ namespace ClassLibrary
             TagName = tagName;
             Content = content;
             OnCreated();
+            state = new WeightNodeState();
+        }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }
