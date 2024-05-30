@@ -42,5 +42,9 @@ namespace ClassLibrary
             CssClasses = cssClasses;
             Children = children;
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

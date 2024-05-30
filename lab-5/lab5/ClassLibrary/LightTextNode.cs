@@ -24,5 +24,9 @@ namespace ClassLibrary
         {
             Text = text;
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

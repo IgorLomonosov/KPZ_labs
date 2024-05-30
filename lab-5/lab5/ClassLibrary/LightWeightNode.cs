@@ -29,5 +29,9 @@ namespace ClassLibrary
             TagName = tagName;
             Content = content;
         }
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
