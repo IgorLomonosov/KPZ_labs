@@ -18,9 +18,12 @@ namespace ClassLibrary
         {
             get
             {
+                OnTextRendered();
                 string classes = CssClasses != null ? string.Join(" ", CssClasses) : "";
+                OnClassListApplied();
                 string childrenHtml = Children != null ? string.Join("", Children.Select(child => child.OuterHtml)) : "";
                 string closingTag = ClosingType == "single" ? "/>" : $">{childrenHtml}</{TagName}>";
+                OnStylesApplied();
 
                 return $"<{TagName} class=\"{classes}\"{closingTag}";
             }
@@ -41,6 +44,7 @@ namespace ClassLibrary
             ClosingType = closingType;
             CssClasses = cssClasses;
             Children = children;
+            OnCreated();
         }
     }
 }

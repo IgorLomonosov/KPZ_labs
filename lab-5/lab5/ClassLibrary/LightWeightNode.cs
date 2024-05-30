@@ -15,6 +15,7 @@ namespace ClassLibrary
         {
             get
             {
+                OnTextRendered();
                 return $"<{TagName}>{Content}</{TagName}>";
             }
         }
@@ -28,6 +29,7 @@ namespace ClassLibrary
         {
             TagName = tagName;
             Content = content;
+            OnCreated();
         }
     }
 }
