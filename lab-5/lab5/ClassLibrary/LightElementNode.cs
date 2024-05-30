@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class LightElementNode : LightNode
+    public class LightElementNode : LightNode, IIterableLightNode
     {
         public string TagName { get; set; }
         public string DisplayType { get; set; }
@@ -41,6 +41,15 @@ namespace ClassLibrary
             ClosingType = closingType;
             CssClasses = cssClasses;
             Children = children;
+        }
+        public ILightNodeIterator CreateDepthFirstIterator()
+        {
+            return new DepthFirstIterator(this);
+        }
+
+        public ILightNodeIterator CreateBreadthFirstIterator()
+        {
+            return new BreadthFirstIterator(this);
         }
     }
 }
